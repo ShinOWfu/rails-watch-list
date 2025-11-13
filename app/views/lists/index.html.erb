@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row justify-content-center gap-3">
+    <% @lists.each do |list| %>
+      <div class="card-category col-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+        <div class="card-product">
+          <p class="mb-0"><%= link_to list.name, list_path(list), class: 'text-decoration-none text-white' %></p>
+        </div>
+      </div>
+    <% end  %>
+  </div>
+</div>
