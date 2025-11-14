@@ -1,6 +1,8 @@
 class ListsController < ApplicationController
   def index
     @lists = List.all
+    @list = List.new
+    @list.bookmarks.build
   end 
 
   def show
@@ -23,7 +25,6 @@ class ListsController < ApplicationController
   private
   
   def list_params
-    params.require(:list).permit(:name, :photo)
+    params.require(:list).permit(:name, :photo, bookmarks_attributes: [:comment, :movie_id, :_destroy])
   end
 end
-

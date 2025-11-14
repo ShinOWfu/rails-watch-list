@@ -6,13 +6,28 @@
 </div>
 <div class="container mt-3">
   <div class="row justify-content-center gap-3">
-    <% @lists.each do |list| %>
-      <div class="card-category col-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : image_path('https://ducunl0s4svtl.cloudfront.net/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg') %>)">
-        <div class="card-product">
-          <p class="mb-0"><%= link_to list.name, list_path(list), class: 'text-decoration-none text-white' %></p>
+    <div class="col-8">
+      <% @lists.each do |list| %>
+        <div class="card-category col-4" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= list.photo.attached? ? cl_image_path(list.photo.key) : image_path('https://ducunl0s4svtl.cloudfront.net/wp-content/uploads/2017/10/flat-clapperboard-icon_1063-38.jpg') %>)">
+          <div class="card-product">
+            <p class="mb-0"><%= link_to list.name, list_path(list), class: 'text-decoration-none text-white' %></p>
+          </div>
         </div>
-      </div>
-    <% end  %>
+      <% end  %>
+    </div>
+    <div class="sticky-top col-3">
+      <h1>Create a new list</h1>
+      <%= simple_form_for @list do |f| %>
+        <%= f.input :name %>
+        <%= f.input :photo, as: :file %>
+        <%= f.simple_fields_for :bookmarks do |bookmark_form| %>
+          <div class="d-flex align-items-center w-100">
+            <%= bookmark_form.input :comment %>
+            <%= bookmark_form.association :movie %>
+          </div>
+        <% end %>
+        <%= f.submit 'Submit', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>
-<%= link_to "Add a new list", new_list_path, class:"btn btn-primary" %>

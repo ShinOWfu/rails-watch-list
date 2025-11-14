@@ -2,4 +2,12 @@
   <%= f.input :name %>
   <%= f.submit 'Submit', class: 'btn btn-primary' %>
   <%= f.input :photo, as: :file %>
+  <%= f.simple_fields_for :bookmarks do |bookmark_form| %>
+    <div class="d-flex align-items-center w-100">
+      <!-- Anything a person would have -->
+      <%= bookmark_form.input :first_name, placeholder: 'John' %>
+      <%= bookmark_form.input :last_name, placeholder: 'John' %>
+    </div>
+  <% end %>
 <% end %>
+// Move all of this to the index page. Use the grid and put this on the right side
